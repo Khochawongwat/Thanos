@@ -145,19 +145,12 @@ class monster{
     bool not_dead() { return hp>0;}
     void die();
     void heal();
-    void evolve(monster&);
     void steal(monster&);
     monster(string = "", int =
-5, int = 2);
+10, int = 5);
     ~monster();
 };
 
-void monster::evolve(monster & b){
-  int mod = getRandom(2);
-  hp = hp * (1 + (mod/100.00));
-  cout << "<Update> " << name << " has evolved from killing "<< b.name << ". it's HP is now "<< hp << endl;
-  
-}
 void monster::print(){
   cout<<"Monster: "<< name << endl;
   cout<<"HP: "<<hp << endl;
@@ -165,8 +158,7 @@ void monster::print(){
 }
 
 void monster::steal(monster & b){
-  int h = getRandom(2);
-  if(h == 1 && b.potion > 0){
+  if(b.potion > 0){
     int amount = getRandom((int)(b.potion/2));
     b.potion -= amount;
     if(amount > 0){
@@ -177,11 +169,10 @@ void monster::steal(monster & b){
  
 void monster::Attack(monster & b){
      cout << name << " attacked " << b.name << endl;
-     b.hp -= (int)(getRandom(hp));
+     b.hp -= (int)(getRandom(hp)/1.5);
      cout << b.name << " has " << b.hp << " HP left" << endl;
      if(b.hp <= 0){
         b.die();
-        evolve(b);
      }  
 }
 

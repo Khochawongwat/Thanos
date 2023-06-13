@@ -12,7 +12,8 @@ class Thanos {
       Thanos(int = 0);
       void snap_finger(monster[], int);
       void operator++();
-      void kill(monster& monster);
+      void kill(monster& monster);  
+      int getStones();
       int countSurviving(monster[], int);
 };
 
@@ -26,9 +27,13 @@ void Thanos::kill(monster& monster) {
 }
 
 void Thanos::operator++() {
+    cout << "Thanos has found a stone ("<< stones << "/6)."<< endl;
     stones++;
 }
 
+int Thanos::getStones(){
+  return stones;
+}
 int Thanos::countSurviving(monster* m, int n){
   int count = 0;
   for(int i = 0; i < n; i++){
